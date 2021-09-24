@@ -20,7 +20,8 @@ services:
       - POSTGRES_DB=voicemate
     container_name: voicemate-db
     volumes:
-      - ./voicemate_database/data:/var/lib/postgresql/data
+      - ./voicemate_database/definition:/docker-entrypoint-initdb.d # Init database and insert initial data.
+      - ./voicemate_database/data:/var/lib/postgresql/data # Preserve data.
     tty: true
     ports:
       - 5432:5432
