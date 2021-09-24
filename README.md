@@ -31,7 +31,7 @@ See modules list in `go.mod`.
 
   Raw data to preserve in a container.
 
-- voicemate_database/initialization
+- voicemate_database/definition
 
   Initialization DDLs.  
   They should be always synced with production database schema.
