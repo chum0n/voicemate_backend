@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  voicemate-api:
+    build: .
+    depends_on:
+      - voicemate-db
+    container_name: voicemate-api
+    volumes:
+      - ./voicemate_api:/go/src
+    command: go run main.go
+    tty: true
+    ports:
+      - "8000:8000"
+  voicemate-db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=voicemate
+    container_name: voicemate-db
+    volumes:
+      - ./voicemate_database/data:/var/lib/postgresql/data
+    tty: true
+    ports:
+      - 5432:5432
