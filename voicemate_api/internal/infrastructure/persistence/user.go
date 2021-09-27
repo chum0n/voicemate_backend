@@ -39,3 +39,19 @@ func (userPersistence UserPersistence) FindUserByID(id uint64) (model.User, erro
 	}
 	return user, nil
 }
+
+func (userPersistence UserPersistence) UpdateUser(id uint64, attributes map[string]interface{}) (model.User, error) {
+	user := model.User{ID: id}
+
+	result := userPersistence.Connection.New().
+		Model(&user).
+		Updates(attributes)
+
+	if result.RecordNotFound() {
+		return user, nil
+	}
+	if result.Error != nil {
+		return user, result.Error
+	}
+	return user, nil
+}
