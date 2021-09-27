@@ -28,8 +28,8 @@ func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, erro
 	result := roomPersistence.Connection.New().
 		Table("rooms").
 		Where(`"id" = ?`, id).
-		Find(&room).
-		Related(&room.Tags, "Tags")
+		Preload("Tags").
+		Find(&room)
 
 	if result.RecordNotFound() {
 		return room, nil
