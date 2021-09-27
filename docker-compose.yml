@@ -11,7 +11,7 @@ services:
       - DBMS=postgres
       - DB_NAME=voicemate
       - DB_HOST=host.docker.internal
-      - DB_PORT=5432
+      - DB_PORT=5433
       - DB_USER=postgres
       - DB_PASSWORD=postgres
     volumes:
