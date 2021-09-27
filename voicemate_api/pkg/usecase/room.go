@@ -1,6 +1,7 @@
 package usecase
 
 import (
+	"log"
 	"strconv"
 
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/internal/infrastructure/persistence"
@@ -31,7 +32,7 @@ func GetRooms(name string, age_lower uint32, age_upper uint32, gender string, me
 	return rooms
 }
 
-func UpdateRoom(id uint64, name string, age_lower_str string, age_upper_str string, gender string, member_limit_str string, introduction string) (room model.Room) {
+func UpdateRoom(id uint64, name string, age_lower_str string, age_upper_str string, gender string, member_limit_str string, introduction string, tag_ids string) (room model.Room) {
 	roomPersistence := persistence.NewRoomPersistence()
 
 	attributes := make(map[string]interface{})
@@ -75,6 +76,12 @@ func UpdateRoom(id uint64, name string, age_lower_str string, age_upper_str stri
 	room, err := roomPersistence.UpdateRoom(id, attributes)
 	if err != nil {
 		panic(err)
+	}
+
+	log.Print(tag_ids)
+	if tag_ids != "" {
+		log.Print("あああ")
+		log.Print(tag_ids)
 	}
 
 	return room
