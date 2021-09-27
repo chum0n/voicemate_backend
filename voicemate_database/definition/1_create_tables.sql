@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS "public"."rooms" (
     "gender" TEXT,
     "member_limit" INTEGER,
     "introduction" TEXT,
+    "member" INTEGER NOT NULL,
     PRIMARY KEY ("id")
 );
 

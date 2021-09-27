@@ -9,9 +9,9 @@ VALUES
 
 -- Rooms
 INSERT INTO "public"."rooms"
-    ("name", "age_lower", "age_upper", "gender", "member_limit", "introduction")
+    ("name", "age_lower", "age_upper", "gender", "member_limit", "introduction", "member")
 VALUES
-    ('room1', 20, 25, 'male', 5, 'hello')
+    ('room1', 20, 25, 'male', 5, 'hello', 3)
 ;
 
 -- Tags
