@@ -28,3 +28,27 @@ func GetTags() []model.Tag {
 	}
 	return tags
 }
+
+// AddTag
+func AddTag(name string) model.Tag {
+	tagPersistence := persistence.NewTagPersistence()
+
+	tag, error := tagPersistence.CreateTag(name)
+
+	if error != nil {
+		panic(error)
+	}
+	return tag
+}
+
+// DeleteTag
+func DeleteTag(id uint64) error {
+	tagPersistence := persistence.NewTagPersistence()
+
+	err := tagPersistence.DeleteTag(id)
+	if err != nil {
+		panic(err)
+	}
+
+	return err
+}
