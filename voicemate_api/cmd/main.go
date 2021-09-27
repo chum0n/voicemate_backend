@@ -13,9 +13,7 @@ func main() {
 	echoInstance.Use(middleware.Logger())
 	echoInstance.Use(middleware.Recover())
 
-	// ルーティング
 	echoInstance.GET("/users", handler.GetUserList())
 
-	// サーバー起動、ポート番号の指定
 	echoInstance.Start(":8000")
 }
