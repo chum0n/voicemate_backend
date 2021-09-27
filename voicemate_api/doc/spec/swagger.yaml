@@ -65,6 +65,20 @@ paths:
         200:
           description: "Response on success"
   /users:
+    get:
+      tags:
+      - "users"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/loginRequest" 
+      responses:
+        200:
+          description: "Response on success"
+          schema:
+            $ref: "#/definitions/usersResponse"
     post:
       tags:
       - "users"
@@ -282,7 +296,7 @@ definitions:
       password:
         type: "string"
         example: "test"
-      roomID:
+      room:
         type: "integer"
         format: "uint64"
         example: 1
@@ -382,4 +396,12 @@ definitions:
       name:
         type: "string"
         example: "サッカー"
-
+  loginRequest:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        example: "test@example.com"
+      password:
+        type: "string"
+        example: "test"
