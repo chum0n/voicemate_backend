@@ -28,3 +28,15 @@ func GetTags() []model.Tag {
 	}
 	return tags
 }
+
+// AddTag
+func AddTag(name string) model.Tag {
+	tagPersistence := persistence.NewTagPersistence()
+
+	tag, error := tagPersistence.CreateTag(name)
+
+	if error != nil {
+		panic(error)
+	}
+	return tag
+}

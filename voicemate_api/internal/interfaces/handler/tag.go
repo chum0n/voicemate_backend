@@ -28,3 +28,12 @@ func GetTags() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, tags)
 	}
 }
+
+func AddTag() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		nameParameter := context.FormValue("name")
+
+		tag := usecase.AddTag(nameParameter)
+		return context.JSON(http.StatusOK, tag)
+	}
+}
