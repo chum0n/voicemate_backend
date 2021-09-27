@@ -53,3 +53,37 @@ func (tagPersistence TagPersistence) GetAll() ([]model.Tag, error) {
 	}
 	return tags, nil
 }
+
+// CreateTag
+func (tagPersistence TagPersistence) CreateTag(name string) (model.Tag, error) {
+	tag := model.Tag{
+		Name: name,
+	}
+
+	result := tagPersistence.Connection.New().Create(&tag)
+	if result.RecordNotFound() {
+		return tag, nil
+	}
+	if result.Error != nil {
+		return tag, result.Error
+	}
+
+	return tag, nil
+}
+
+// DeleteTag
+func (tagPersistence TagPersistence) DeleteTag(id uint64) error {
+	tag := model.Tag{
+		ID: id,
+	}
+
+	result := tagPersistence.Connection.New().Delete(&tag)
+	if result.RecordNotFound() {
+		return nil
+	}
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
