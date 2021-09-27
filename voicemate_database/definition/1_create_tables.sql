@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS "public"."tags" (
     PRIMARY KEY ("id")
 );
 
--- User_tag
+-- User tags
 DROP TABLE IF EXISTS "public"."user_tags" CASCADE;
 
 CREATE TABLE IF NOT EXISTS "public"."user_tags" (
@@ -50,10 +50,12 @@ CREATE TABLE IF NOT EXISTS "public"."user_tags" (
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "user_id" BIGSERIAL NOT NULL,
     "tag_id" BIGSERIAL NOT NULL,
-    PRIMARY KEY ("user_id", "tag_id")
+    PRIMARY KEY ("user_id", "tag_id"),
+    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id"),
+    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id")
 );
 
--- Rooms_tag
+-- Room tags
 DROP TABLE IF EXISTS "public"."room_tags" CASCADE;
 
 CREATE TABLE IF NOT EXISTS "public"."room_tags" (
@@ -61,7 +63,9 @@ CREATE TABLE IF NOT EXISTS "public"."room_tags" (
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "room_id" BIGSERIAL NOT NULL,
     "tag_id" BIGSERIAL NOT NULL,
-    PRIMARY KEY ("room_id", "tag_id")
+    PRIMARY KEY ("room_id", "tag_id"),
+    FOREIGN KEY ("room_id") REFERENCES "public"."rooms"("id"),
+    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id")
 );
 
 -- Follows
@@ -73,7 +77,9 @@ CREATE TABLE IF NOT EXISTS "follows" (
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "user_id" BIGSERIAL NOT NULL,
     "follow_id" BIGSERIAL NOT NULL,
-    PRIMARY KEY ("id", "user_id", "follow_id")
+    PRIMARY KEY ("id", "user_id", "follow_id"),
+    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id"),
+    FOREIGN KEY ("follow_id") REFERENCES "public"."users"("id")
 );
 
 -- Blocks
@@ -85,5 +91,7 @@ CREATE TABLE IF NOT EXISTS "blocks" (
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "user_id" BIGSERIAL NOT NULL,
     "block_id" BIGSERIAL NOT NULL,
-    PRIMARY KEY ("id", "user_id", "block_id")
+    PRIMARY KEY ("id", "user_id", "block_id"),
+    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id"),
+    FOREIGN KEY ("block_id") REFERENCES "public"."users"("id")
 );
