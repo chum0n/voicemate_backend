@@ -16,3 +16,28 @@ func GetUser(id uint64) model.User {
 	}
 	return user
 }
+
+func UpdateUser(id uint64, name string, email string, password string) model.User {
+	userPersistence := persistence.NewUserPersistence()
+
+	attributes := make(map[string]interface{})
+
+	if name != "" {
+		attributes["Name"] = name
+	}
+
+	if email != "" {
+		attributes["Email"] = name
+	}
+
+	if password != "" {
+		attributes["Password"] = password
+	}
+
+	user, error := userPersistence.UpdateUser(id, attributes)
+
+	if error != nil {
+		panic(error)
+	}
+	return user
+}

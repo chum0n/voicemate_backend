@@ -14,6 +14,7 @@ func main() {
 	echoInstance.Use(middleware.Recover())
 
 	echoInstance.GET("/users/:id", handler.GetUser())
+	echoInstance.PUT("/users/:id", handler.UpdateUser())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
