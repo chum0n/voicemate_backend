@@ -15,6 +15,9 @@ func main() {
 
 	echoInstance.GET("/users", handler.GetUserList())
 
+	// 部屋
+	echoInstance.GET("/rooms/:id", handler.GetRoom())
+
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
 	echoInstance.GET("/tags", handler.GetTags())
