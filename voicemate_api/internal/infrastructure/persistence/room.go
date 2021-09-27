@@ -26,7 +26,10 @@ func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, erro
 	room := model.Room{}
 
 	result := roomPersistence.Connection.New().
-		First(&room, id)
+		Table("rooms").
+		Where(`"id" = ?`, id).
+		Find(&room).
+		Related(&room.Tags, "Tags")
 
 	if result.RecordNotFound() {
 		return room, nil
