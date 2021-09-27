@@ -12,3 +12,17 @@ CREATE TRIGGER "users_updated_at_trigger"
 BEFORE UPDATE ON "users"
 FOR EACH ROW
 EXECUTE PROCEDURE set_update_time();
+
+-- Rooms
+DROP TRIGGER IF EXISTS "rooms_updated_at_trigger" ON "rooms";
+CREATE TRIGGER "rooms_updated_at_trigger"
+BEFORE UPDATE ON "rooms"
+FOR EACH ROW
+EXECUTE PROCEDURE set_update_time();
+
+-- Tags
+DROP TRIGGER IF EXISTS "tags_updated_at_trigger" ON "tags";
+CREATE TRIGGER "tags_updated_at_trigger"
+BEFORE UPDATE ON "tags"
+FOR EACH ROW
+EXECUTE PROCEDURE set_update_time();
