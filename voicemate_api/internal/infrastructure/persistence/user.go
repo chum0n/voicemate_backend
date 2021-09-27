@@ -29,8 +29,8 @@ func (userPersistence UserPersistence) FindUserByID(id uint64) (model.User, erro
 	result := userPersistence.Connection.New().
 		Table("users").
 		Where(`"id" = ?`, id).
-		Find(&user).
-		Related(&user.Tags, "Tags")
+		Preload("Tags").
+		Find(&user)
 
 	if result.RecordNotFound() {
 		return user, nil
