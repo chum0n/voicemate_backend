@@ -1,7 +1,7 @@
 package model
 
 type (
-	// VOD is a VOD (video on demand) service.
+	// User is a user on voicemate.
 	User struct {
 		ID       uint64  `json:"id" gorm:"column:id;type:bigserial;not null;primary_key"`
 		Name     string  `json:"name" gorm:"column:name;type:text;not null"`
