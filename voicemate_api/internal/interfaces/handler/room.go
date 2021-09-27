@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo"
+	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/usecase"
 )
 
@@ -70,15 +71,20 @@ func UpdateRoom() echo.HandlerFunc {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
 
-		nameParameter := context.FormValue("name")
-		ageLowerParameter := context.FormValue("ageLower")
-		ageUpperParameter := context.FormValue("ageUpper")
-		genderParameter := context.FormValue("gender")
-		memberLimitParameter := context.FormValue("memberLimit")
-		introductionParameter := context.FormValue("introduction")
-		tagsParameter := context.FormValue("tagIDs")
+		var requestBody body.PutRoomRequest
+		if err := context.Bind(requestBody); err != nil {
+			return err
+		}
+		// nameParameter := context.FormValue("name")
+		// ageLowerParameter := context.FormValue("ageLower")
+		// ageUpperParameter := context.FormValue("ageUpper")
+		// genderParameter := context.FormValue("gender")
+		// memberLimitParameter := context.FormValue("memberLimit")
+		// introductionParameter := context.FormValue("introduction")
+		// tagsParameter := context.FormValue("tagIDs")
 
-		user := usecase.UpdateRoom(id, nameParameter, ageLowerParameter, ageUpperParameter, genderParameter, memberLimitParameter, introductionParameter, tagsParameter)
+		user := usecase.UpdateRoom(id, requestBody)
+		// user := usecase.UpdateRoom(id, nameParameter, ageLowerParameter, ageUpperParameter, genderParameter, memberLimitParameter, introductionParameter, tagsParameter)
 		return context.JSON(http.StatusOK, user)
 	}
 }

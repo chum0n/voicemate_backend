@@ -1,6 +1,6 @@
 package body
 
-type putRoomRequest struct {
+type PutRoomRequest struct {
 	Name         string   `json:"name"`
 	AgeLower     uint32   `json:"ageLower"`
 	AgeUpper     uint32   `json:"ageUpper"`
