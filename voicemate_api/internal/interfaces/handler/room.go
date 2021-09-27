@@ -76,7 +76,7 @@ func UpdateRoom() echo.HandlerFunc {
 			return err
 		}
 
-		user := usecase.UpdateRoom(id, requestBody)
-		return context.JSON(http.StatusOK, user)
+		room := usecase.UpdateRoom(id, requestBody)
+		return context.JSON(http.StatusOK, room)
 	}
 }
