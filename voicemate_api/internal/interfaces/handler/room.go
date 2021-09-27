@@ -72,19 +72,11 @@ func UpdateRoom() echo.HandlerFunc {
 		}
 
 		var requestBody body.PutRoomRequest
-		if err := context.Bind(requestBody); err != nil {
+		if err := context.Bind(&requestBody); err != nil {
 			return err
 		}
-		// nameParameter := context.FormValue("name")
-		// ageLowerParameter := context.FormValue("ageLower")
-		// ageUpperParameter := context.FormValue("ageUpper")
-		// genderParameter := context.FormValue("gender")
-		// memberLimitParameter := context.FormValue("memberLimit")
-		// introductionParameter := context.FormValue("introduction")
-		// tagsParameter := context.FormValue("tagIDs")
 
 		user := usecase.UpdateRoom(id, requestBody)
-		// user := usecase.UpdateRoom(id, nameParameter, ageLowerParameter, ageUpperParameter, genderParameter, memberLimitParameter, introductionParameter, tagsParameter)
 		return context.JSON(http.StatusOK, user)
 	}
 }
