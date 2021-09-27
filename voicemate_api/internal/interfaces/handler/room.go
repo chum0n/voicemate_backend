@@ -71,10 +71,13 @@ func UpdateRoom() echo.HandlerFunc {
 		}
 
 		nameParameter := context.FormValue("name")
-		emailParameter := context.FormValue("email")
-		passwordParameter := context.FormValue("password")
+		ageLowerParameter := context.FormValue("age_lower")
+		ageUpperParameter := context.FormValue("age_upper")
+		genderParameter := context.FormValue("gender")
+		memberLimitParameter := context.FormValue("member_limit")
+		introductionParameter := context.FormValue("introduction")
 
-		user := usecase.UpdateRoom(id, nameParameter, emailParameter, passwordParameter)
+		user := usecase.UpdateRoom(id, nameParameter, ageLowerParameter, ageUpperParameter, genderParameter, memberLimitParameter, introductionParameter)
 		return context.JSON(http.StatusOK, user)
 	}
 }

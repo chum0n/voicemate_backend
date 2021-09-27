@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"strconv"
+
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/internal/infrastructure/persistence"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/model"
 )
@@ -29,7 +31,7 @@ func GetRooms(name string, age_lower uint32, age_upper uint32, gender string, me
 	return rooms
 }
 
-func UpdateRoom(id uint64, name string, age_lower *uint32, age_upper *uint32, gender string, member_limit *uint32, introduction string) model.Room {
+func UpdateRoom(id uint64, name string, age_lower_str string, age_upper_str string, gender string, member_limit_str string, introduction string) (room model.Room) {
 	roomPersistence := persistence.NewRoomPersistence()
 
 	attributes := make(map[string]interface{})
@@ -38,12 +40,36 @@ func UpdateRoom(id uint64, name string, age_lower *uint32, age_upper *uint32, ge
 		attributes["Name"] = name
 	}
 
-	if age_lower != nil {
-		attributes["Email"] = name
+	if age_lower_str != "" {
+		age_lower, error := strconv.ParseUint(age_lower_str, 10, 32)
+		if error != nil {
+			return room
+		}
+		attributes["AgeLower"] = age_lower
 	}
 
-	if password != "" {
-		attributes["Password"] = password
+	if age_upper_str != "" {
+		age_upper, error := strconv.ParseUint(age_upper_str, 10, 32)
+		if error != nil {
+			return room
+		}
+		attributes["AgeUpper"] = age_upper
+	}
+
+	if gender != "" {
+		attributes["Gender"] = gender
+	}
+
+	if member_limit_str != "" {
+		member_limit, error := strconv.ParseUint(member_limit_str, 10, 32)
+		if error != nil {
+			return room
+		}
+		attributes["MemberLimit"] = member_limit
+	}
+
+	if introduction != "" {
+		attributes["Introduction"] = introduction
 	}
 
 	room, err := roomPersistence.UpdateRoom(id, attributes)
