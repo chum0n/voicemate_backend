@@ -151,7 +151,9 @@ paths:
         200:
           description: "Response on success"
           schema:
-            $ref: "#/definitions/roomsResponse"
+            type: "array"
+            items:
+              $ref: "#/definitions/roomsResponse"
     post:
       tags:
       - "rooms"
@@ -210,6 +212,21 @@ paths:
         200:
           description: "Response on success"
   /tags:
+    get:
+        tags:
+        - "tags"
+        parameters:
+        - name: "name"
+          in: "query"
+          required: false
+          type: "string"
+        responses:
+          200:
+            description: "Response on success"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/tagsResponse"
     post:
       tags:
       - "tags"
