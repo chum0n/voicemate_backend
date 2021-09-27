@@ -7,7 +7,7 @@ import (
 type (
 	// TagRepository is the interface of Tag repository.
 	TagRepository interface {
-		FindTagByID() (model.Tag, error)
+		FindTagByID(id uint64) (model.Tag, error)
 		GetAll() ([]model.Tag, error)
 	}
 )
