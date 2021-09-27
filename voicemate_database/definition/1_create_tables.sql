@@ -41,3 +41,49 @@ CREATE TABLE IF NOT EXISTS "public"."tags" (
     "name" TEXT NOT NULL CHECK (CHARACTER_LENGTH("name") > 0),
     PRIMARY KEY ("id")
 );
+
+-- User_tag
+DROP TABLE IF EXISTS "public"."user_tags" CASCADE;
+
+CREATE TABLE IF NOT EXISTS "public"."user_tags" (
+    "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "user_id" BIGSERIAL NOT NULL,
+    "tag_id" BIGSERIAL NOT NULL,
+    PRIMARY KEY ("user_id", "tag_id")
+);
+
+-- Rooms_tag
+DROP TABLE IF EXISTS "public"."room_tags" CASCADE;
+
+CREATE TABLE IF NOT EXISTS "public"."room_tags" (
+    "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "room_id" BIGSERIAL NOT NULL,
+    "tag_id" BIGSERIAL NOT NULL,
+    PRIMARY KEY ("room_id", "tag_id")
+);
+
+-- Follows
+DROP TABLE IF EXISTS "public"."follows" CASCADE;
+
+CREATE TABLE IF NOT EXISTS "follows" (
+    "id" BIGSERIAL NOT NULL,
+    "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "user_id" BIGSERIAL NOT NULL,
+    "follow_id" BIGSERIAL NOT NULL,
+    PRIMARY KEY ("id", "user_id", "follow_id")
+);
+
+-- Blocks
+DROP TABLE IF EXISTS "public"."blocks" CASCADE;
+
+CREATE TABLE IF NOT EXISTS "blocks" (
+    "id" BIGSERIAL NOT NULL,
+    "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    "user_id" BIGSERIAL NOT NULL,
+    "block_id" BIGSERIAL NOT NULL,
+    PRIMARY KEY ("id", "user_id", "block_id")
+);
