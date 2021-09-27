@@ -5,14 +5,14 @@ import (
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/model"
 )
 
-// GetUserList gets users matched with condition.
-func GetUserList() []model.User {
+// GetUserList get a user by ID.
+func GetUser(id uint64) model.User {
 	userPersistence := persistence.NewUserPersistence()
 
-	users, error := userPersistence.GetAll()
+	user, error := userPersistence.FindUserByID(id)
 
 	if error != nil {
 		panic(error)
 	}
-	return users
+	return user
 }

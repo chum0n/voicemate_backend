@@ -20,7 +20,7 @@ func main() {
 	echoInstance.Use(middleware.Logger())
 	echoInstance.Use(middleware.Recover())
 
-	echoInstance.GET("/users", handler.GetUserList())
+	echoInstance.GET("/users/:id", handler.GetUser())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
