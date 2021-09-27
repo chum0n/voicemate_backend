@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS "public"."tags" (
     PRIMARY KEY ("id")
 );
 
--- Users_tag
+-- User_tag
 DROP TABLE IF EXISTS "public"."user_tags" CASCADE;
 
-CREATE TABLE IF NOT EXISTS "public"."users_tags" (
+CREATE TABLE IF NOT EXISTS "public"."user_tags" (
     "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "user_id" BIGSERIAL NOT NULL,
@@ -54,9 +54,9 @@ CREATE TABLE IF NOT EXISTS "public"."users_tags" (
 );
 
 -- Rooms_tag
-DROP TABLE IF EXISTS "public"."rooms_tags" CASCADE;
+DROP TABLE IF EXISTS "public"."room_tags" CASCADE;
 
-CREATE TABLE IF NOT EXISTS "public"."rooms_tags" (
+CREATE TABLE IF NOT EXISTS "public"."room_tags" (
     "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "room_id" BIGSERIAL NOT NULL,

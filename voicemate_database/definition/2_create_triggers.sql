@@ -28,16 +28,16 @@ FOR EACH ROW
 EXECUTE PROCEDURE set_update_time();
 
 -- Users_tag
-DROP TRIGGER IF EXISTS "users_tag_updated_at_trigger" ON "users_tag";
-CREATE TRIGGER "users_tag_updated_at_trigger"
-BEFORE UPDATE ON "users_tag"
+DROP TRIGGER IF EXISTS "user_tags_updated_at_trigger" ON "user_tags";
+CREATE TRIGGER "user_tags_updated_at_trigger"
+BEFORE UPDATE ON "user_tags"
 FOR EACH ROW
 EXECUTE PROCEDURE set_update_time();
 
 -- Rooms_tag
-DROP TRIGGER IF EXISTS "rooms_tag_updated_at_trigger" ON "rooms_tag";
-CREATE TRIGGER "rooms_tag_updated_at_trigger"
-BEFORE UPDATE ON "rooms_tag"
+DROP TRIGGER IF EXISTS "room_tags_updated_at_trigger" ON "room_tags";
+CREATE TRIGGER "room_tags_updated_at_trigger"
+BEFORE UPDATE ON "room_tags"
 FOR EACH ROW
 EXECUTE PROCEDURE set_update_time();
 
