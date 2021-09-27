@@ -22,6 +22,10 @@ func main() {
 
 	echoInstance.GET("/users/:id", handler.GetUser())
 
+	// 部屋
+	echoInstance.GET("/rooms/:id", handler.GetRoom())
+	echoInstance.GET("/rooms", handler.GetRooms())
+
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
 	echoInstance.GET("/tags", handler.GetTags())
