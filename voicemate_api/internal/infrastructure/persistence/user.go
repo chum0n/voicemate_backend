@@ -24,6 +24,7 @@ func NewUserPersistence() repository.UserRepository {
 // FindUserByID find a user by ID.
 func (userPersistence UserPersistence) FindUserByID(id uint64) (model.User, error) {
 	user := model.User{}
+	userPersistence.Connection.LogMode(true)
 
 	result := userPersistence.Connection.New().
 		Table("users").
