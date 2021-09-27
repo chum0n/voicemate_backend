@@ -10,7 +10,7 @@ type (
 		MemberLimit  *uint32 `json:"memberLimit" gorm:"column:member_limit;type:integer;"`
 		Introduction *string `json:"introduction" gorm:"column:introduction;type:text;"`
 
-		Tags []Tag `json:"tags" gorm:"many2many:user_tags;"`
+		Tags []Tag `json:"tags" gorm:"many2many:room_tags;"`
 	}
 )
 
