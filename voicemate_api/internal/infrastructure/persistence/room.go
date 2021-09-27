@@ -25,8 +25,6 @@ func NewRoomPersistence() repository.RoomRepository {
 func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, error) {
 	room := model.Room{}
 
-	roomPersistence.Connection.LogMode(true)
-
 	result := roomPersistence.Connection.New().
 		Table("rooms").
 		Where(`"id" = ?`, id).
@@ -45,8 +43,6 @@ func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, erro
 // GetAll gets rooms from DB.
 func (roomPersistence RoomPersistence) GetRooms(name string, age_lower uint32, age_upper uint32, gender string, member_limit uint32) ([]model.Room, error) {
 	rooms := []model.Room{}
-
-	roomPersistence.Connection.LogMode(true)
 
 	query := roomPersistence.Connection.New().
 		Where("age_lower >= ? AND age_upper <= ? AND member_limit <= ?", age_lower, age_upper, member_limit)
