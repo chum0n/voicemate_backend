@@ -18,6 +18,7 @@ func main() {
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
 	echoInstance.GET("/tags", handler.GetTags())
+	echoInstance.POST("/tags", handler.AddTag())
 
 	echoInstance.Start(":8000")
 }

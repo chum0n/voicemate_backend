@@ -57,7 +57,7 @@ func (tagPersistence TagPersistence) GetAll() ([]model.Tag, error) {
 // CreateTag
 func (tagPersistence TagPersistence) CreateTag(name string) (model.Tag, error) {
 	tag := model.Tag{
-		Name: "name",
+		Name: name,
 	}
 
 	result := tagPersistence.Connection.New().Create(&tag)
