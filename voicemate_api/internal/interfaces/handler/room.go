@@ -66,7 +66,7 @@ func GetRooms() echo.HandlerFunc {
 func UpdateRoom() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		idParameter := context.Param("id")
-		id, error := strconv.ParseUint(idParameter, 10, 0)
+		id, error := strconv.ParseUint(idParameter, 10, 64)
 		if error != nil {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
