@@ -80,3 +80,15 @@ func UpdateRoom() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, user)
 	}
 }
+
+func AddRoom() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		var requestBody body.PutRoomRequest
+		if err := context.Bind(&requestBody); err != nil {
+			return err
+		}
+
+		room := usecase.AddRoom(requestBody)
+		return context.JSON(http.StatusOK, room)
+	}
+}
