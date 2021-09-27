@@ -7,6 +7,6 @@ import (
 type (
 	// UserRepository is the interface of User repository.
 	UserRepository interface {
-		GetAll() ([]model.User, error)
+		FindUserByID(uint64) (model.User, error)
 	}
 )
