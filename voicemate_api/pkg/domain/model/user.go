@@ -8,7 +8,7 @@ type (
 		Email    string  `json:"email" gorm:"column:email;type:text;not null"`
 		Password string  `json:"password" gorm:"column:password;type:text;not null"`
 		Age      *uint32 `json:"age" gorm:"column:age;type:integer"`
-		Gender   string  `json:"gender" gorm:"column:gender;type:text"`
+		Gender   *string `json:"gender" gorm:"column:gender;type:text"`
 		RoomID   *uint64 `json:"roomID" gorm:"column:room_id;type:bigint"`
 	}
 )
