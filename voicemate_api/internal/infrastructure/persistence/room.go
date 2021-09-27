@@ -63,5 +63,6 @@ func (roomPersistence RoomPersistence) GetRooms(name string, age_lower uint32, a
 	if result.Error != nil {
 		return rooms, result.Error
 	}
+
 	return rooms, nil
 }
