@@ -7,7 +7,7 @@ import (
 type (
 	// RoomRepository is the interface of Room repository.
 	RoomRepository interface {
-		FindRoom(id uint64) (model.Room, error)
+		FindRoomByID(id uint64) (model.Room, error)
 		// GetAll() ([]model.Room, error)
 	}
 )
