@@ -20,3 +20,17 @@ INSERT INTO "public"."tags"
 VALUES
     ('baseball')
 ;
+
+-- User tags
+INSERT INTO "public"."user_tags"
+    ("user_id", "tag_id")
+VALUES
+    (1, 1)
+;
+
+-- Room tags
+INSERT INTO "public"."room_tags"
+    ("room_id", "tag_id")
+VALUES
+    (1, 1)
+;
