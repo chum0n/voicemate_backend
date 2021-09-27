@@ -15,6 +15,7 @@ func main() {
 
 	echoInstance.GET("/users/:id", handler.GetUser())
 	echoInstance.PUT("/users/:id", handler.UpdateUser())
+	echoInstance.POST("/users", handler.AddUser())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())

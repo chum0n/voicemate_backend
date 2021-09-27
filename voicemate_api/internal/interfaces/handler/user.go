@@ -38,3 +38,14 @@ func UpdateUser() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, user)
 	}
 }
+
+func AddUser() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		nameParameter := context.FormValue("name")
+		emailParameter := context.FormValue("email")
+		passwordParameter := context.FormValue("password")
+
+		user := usecase.AddUser(nameParameter, emailParameter, passwordParameter)
+		return context.JSON(http.StatusOK, user)
+	}
+}
