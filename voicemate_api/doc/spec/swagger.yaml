@@ -166,7 +166,82 @@ paths:
           description: "Response on success"
           schema:
             $ref: "#/definitions/roomsResponse"
+  /tags/{id}:
+    get:
+      tags:
+      - "tags"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "Response on success"
+          schema:
+            $ref: "#/definitions/tagsResponse"
+    put:
+      tags:
+      - "tags"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/tagsRequest" 
+      responses:
+        200:
+          description: "Response on success"
+          schema:
+            $ref: "#/definitions/tagsResponse"
+    delete:
+      tags:
+      - "tags"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "Response on success"
+  /tags:
+    post:
+      tags:
+      - "tags"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/tagsRequest" 
+      responses:
+        200:
+          description: "Response on success"
+          schema:
+            $ref: "#/definitions/tagsResponse"
 definitions:
+  Tag:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      name:
+        type: "string"
+        example: "野球"
+  Tag_id:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
   usersResponse:
     type: "object"
     properties:
@@ -194,6 +269,10 @@ definitions:
         type: "integer"
         format: "uint64"
         example: 1
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag"
   roomsResponse:
     type: "object"
     properties:
@@ -222,6 +301,20 @@ definitions:
       introduction:
         type: "string"
         example: "test"
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag"
+  tagsResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "uint64"
+        example: 1
+      name:
+        type: "string"
+        example: "野球"
   usersRequest:
     type: "object"
     properties:
@@ -234,6 +327,10 @@ definitions:
       password:
         type: "string"
         example: "test"
+      tag_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag_id"
   roomsRequest:
     type: "object"
     properties:
@@ -258,4 +355,14 @@ definitions:
       introduction:
         type: "string"
         example: "test"
+      tag_ids:
+        type: "array"
+        items:
+          $ref: "#/definitions/Tag_id"
+  tagsRequest:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "サッカー"
 
