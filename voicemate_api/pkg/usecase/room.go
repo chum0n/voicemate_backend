@@ -55,3 +55,28 @@ func UpdateRoom(id uint64, requestBody body.PutRoomRequest) (room model.Room) {
 
 	return room
 }
+
+func AddRoom(requestBody body.PutRoomRequest) (room model.Room) {
+	roomPersistence := persistence.NewRoomPersistence()
+
+	// attributes := make(map[string]interface{})
+
+	// attributes["Name"] = requestBody.Name
+	// attributes["AgeLower"] = requestBody.AgeLower
+	// attributes["AgeUpper"] = requestBody.AgeUpper
+	// attributes["Gender"] = requestBody.Gender
+	// attributes["MemberLimit"] = requestBody.MemberLimit
+	// attributes["Introduction"] = requestBody.Introduction
+
+	room, err := roomPersistence.CreateRoom(requestBody)
+	if err != nil {
+		panic(err)
+	}
+
+	err = roomPersistence.SaveTags(room.ID, requestBody.TagIDs)
+	if err != nil {
+		panic(err)
+	}
+
+	return room
+}

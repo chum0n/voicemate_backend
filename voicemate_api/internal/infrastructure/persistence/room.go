@@ -3,6 +3,7 @@ package persistence
 import (
 	"github.com/jinzhu/gorm"
 
+	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/model"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/repository"
 )
@@ -115,4 +116,25 @@ func (roomPersistence RoomPersistence) SaveTags(id uint64, tagIDs []uint64) erro
 	}
 
 	return nil
+}
+
+func (roomPersistence RoomPersistence) CreateRoom(requestBody body.PutRoomRequest) (model.Room, error) {
+	room := model.Room{
+		Name:         requestBody.Name,
+		AgeLower:     &requestBody.AgeLower,
+		AgeUpper:     &requestBody.AgeUpper,
+		Gender:       &requestBody.Gender,
+		MemberLimit:  &requestBody.MemberLimit,
+		Introduction: &requestBody.Introduction,
+	}
+
+	result := roomPersistence.Connection.New().Create(&room)
+	if result.RecordNotFound() {
+		return room, nil
+	}
+	if result.Error != nil {
+		return room, result.Error
+	}
+
+	return room, nil
 }
