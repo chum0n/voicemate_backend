@@ -16,3 +16,15 @@ func GetRoom(id uint64) model.Room {
 
 	return room
 }
+
+// GetRooms gets rooms matched with condition.
+func GetRooms(name string, age_lower uint32, age_upper uint32, gender string, member_limit uint32) []model.Room {
+	roomPersistence := persistence.NewRoomPersistence()
+
+	rooms, err := roomPersistence.GetRooms(name, age_lower, age_upper, gender, member_limit)
+	if err != nil {
+		panic(err)
+	}
+
+	return rooms
+}

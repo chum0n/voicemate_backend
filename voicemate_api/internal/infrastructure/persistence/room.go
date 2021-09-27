@@ -41,18 +41,18 @@ func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, erro
 }
 
 // GetAll gets rooms from DB.
-// func (roomPersistence RoomPersistence) GetAll() ([]model.Room, error) {
-// 	rooms := []model.Room{}
+func (roomPersistence RoomPersistence) GetRooms(name string, age_lower uint32, age_upper uint32, gender string, member_limit uint32) ([]model.Room, error) {
+	rooms := []model.Room{}
 
-// 	result := roomPersistence.Connection.New().
-// 		Table("rooms").
-// 		Find(&rooms)
+	result := roomPersistence.Connection.New().
+		Table("rooms").
+		Find(&rooms)
 
-// 	if result.RecordNotFound() {
-// 		return rooms, nil
-// 	}
-// 	if result.Error != nil {
-// 		return rooms, result.Error
-// 	}
-// 	return rooms, nil
-// }
+	if result.RecordNotFound() {
+		return rooms, nil
+	}
+	if result.Error != nil {
+		return rooms, result.Error
+	}
+	return rooms, nil
+}

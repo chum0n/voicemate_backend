@@ -11,12 +11,53 @@ import (
 func GetRoom() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		idParameter := context.Param("id")
-		id, error := strconv.ParseUint(idParameter, 10, 64)
+		idParameter_int, error := strconv.ParseUint(idParameter, 10, 64)
 		if error != nil {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
 
-		room := usecase.GetRoom(id)
+		room := usecase.GetRoom(idParameter_int)
 		return context.JSON(http.StatusOK, room)
+	}
+}
+
+func GetRooms() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		nameParameter := context.QueryParam("name")
+
+		ageLowerParameter := context.QueryParam("age_lower")
+		ageLowerParameter_int := uint32(0)
+		if ageLowerParameter != "" {
+			tmp, err := strconv.ParseUint(ageLowerParameter, 10, 64)
+			if err != nil {
+				return context.JSON(http.StatusBadRequest, nil)
+			}
+			ageLowerParameter_int = uint32(tmp)
+		}
+
+		ageUpperParameter := context.QueryParam("age_upper")
+		ageUpperParameter_int := uint32(1000)
+		if ageUpperParameter != "" {
+			tmp, err := strconv.ParseUint(ageUpperParameter, 10, 64)
+			if err != nil {
+				return context.JSON(http.StatusBadRequest, nil)
+			}
+			ageUpperParameter_int = uint32(tmp)
+		}
+
+		genderParameter := context.QueryParam("gender")
+
+		memberLimitParameter := context.QueryParam("member_limit")
+		memberLimitParameter_int := uint32(1000)
+		if memberLimitParameter != "" {
+			tmp, err := strconv.ParseUint(memberLimitParameter, 10, 64)
+			if err != nil {
+				return context.JSON(http.StatusBadRequest, nil)
+			}
+			memberLimitParameter_int = uint32(tmp)
+		}
+
+		rooms := usecase.GetRooms(nameParameter, ageLowerParameter_int, ageUpperParameter_int, genderParameter, memberLimitParameter_int)
+		return context.JSON(http.StatusOK, rooms)
 	}
 }
