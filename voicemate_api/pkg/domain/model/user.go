@@ -10,6 +10,8 @@ type (
 		Age      *uint32 `json:"age" gorm:"column:age;type:integer"`
 		Gender   *string `json:"gender" gorm:"column:gender;type:text"`
 		RoomID   *uint64 `json:"roomID" gorm:"column:room_id;type:bigint"`
+
+		Tags []Tag `json:"tags" gorm:"many2many:user_tags;"`
 	}
 )
 

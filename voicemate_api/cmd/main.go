@@ -13,7 +13,7 @@ func main() {
 	echoInstance.Use(middleware.Logger())
 	echoInstance.Use(middleware.Recover())
 
-	echoInstance.GET("/users", handler.GetUserList())
+	echoInstance.GET("/users/:id", handler.GetUser())
 
 	echoInstance.Start(":8000")
 }

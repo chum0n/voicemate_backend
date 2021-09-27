@@ -21,19 +21,21 @@ func NewUserPersistence() repository.UserRepository {
 	}
 }
 
-// GetAll gets users from DB.
-func (userPersistence UserPersistence) GetAll() ([]model.User, error) {
-	users := []model.User{}
+// FindUserByID find a user by ID.
+func (userPersistence UserPersistence) FindUserByID(id uint64) (model.User, error) {
+	user := model.User{}
 
 	result := userPersistence.Connection.New().
 		Table("users").
-		Find(&users)
+		Where(`"id" = ?`, id).
+		Find(&user).
+		Related(&user.Tags, "Tags")
 
 	if result.RecordNotFound() {
-		return users, nil
+		return user, nil
 	}
 	if result.Error != nil {
-		return users, result.Error
+		return user, result.Error
 	}
-	return users, nil
+	return user, nil
 }
