@@ -25,6 +25,7 @@ func main() {
 	// 部屋
 	echoInstance.GET("/rooms/:id", handler.GetRoom())
 	echoInstance.GET("/rooms", handler.GetRooms())
+	echoInstance.PUT("/rooms/:id", handler.UpdateRoom())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())

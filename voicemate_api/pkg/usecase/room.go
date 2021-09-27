@@ -28,3 +28,28 @@ func GetRooms(name string, age_lower uint32, age_upper uint32, gender string, me
 
 	return rooms
 }
+
+func UpdateRoom(id uint64, name string, age_lower *uint32, age_upper *uint32, gender string, member_limit *uint32, introduction string) model.Room {
+	roomPersistence := persistence.NewRoomPersistence()
+
+	attributes := make(map[string]interface{})
+
+	if name != "" {
+		attributes["Name"] = name
+	}
+
+	if age_lower != nil {
+		attributes["Email"] = name
+	}
+
+	if password != "" {
+		attributes["Password"] = password
+	}
+
+	room, err := roomPersistence.UpdateRoom(id, attributes)
+	if err != nil {
+		panic(err)
+	}
+
+	return room
+}

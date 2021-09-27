@@ -61,3 +61,20 @@ func GetRooms() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, rooms)
 	}
 }
+
+func UpdateRoom() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		idParameter := context.Param("id")
+		id, error := strconv.ParseUint(idParameter, 10, 0)
+		if error != nil {
+			return context.JSON(http.StatusBadRequest, nil)
+		}
+
+		nameParameter := context.FormValue("name")
+		emailParameter := context.FormValue("email")
+		passwordParameter := context.FormValue("password")
+
+		user := usecase.UpdateRoom(id, nameParameter, emailParameter, passwordParameter)
+		return context.JSON(http.StatusOK, user)
+	}
+}
