@@ -10,5 +10,6 @@ type (
 		FindTagByID(id uint64) (model.Tag, error)
 		GetAll() ([]model.Tag, error)
 		CreateTag(name string) (model.Tag, error)
+		DeleteTag(id uint64) error
 	}
 )

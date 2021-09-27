@@ -39,3 +39,16 @@ func AddTag() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, tag)
 	}
 }
+
+func DeleteTag() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		idParameter := context.Param("id")
+		id, err := strconv.ParseUint(idParameter, 10, 64)
+		if err != nil {
+			return context.JSON(http.StatusBadRequest, nil)
+		}
+
+		err = usecase.DeleteTag(id)
+		return context.JSON(http.StatusOK, err)
+	}
+}

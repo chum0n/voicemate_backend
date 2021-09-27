@@ -70,3 +70,20 @@ func (tagPersistence TagPersistence) CreateTag(name string) (model.Tag, error) {
 
 	return tag, nil
 }
+
+// DeleteTag
+func (tagPersistence TagPersistence) DeleteTag(id uint64) error {
+	tag := model.Tag{
+		ID: id,
+	}
+
+	result := tagPersistence.Connection.New().Delete(&tag)
+	if result.RecordNotFound() {
+		return nil
+	}
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

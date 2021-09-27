@@ -40,3 +40,15 @@ func AddTag(name string) model.Tag {
 	}
 	return tag
 }
+
+// DeleteTag
+func DeleteTag(id uint64) error {
+	tagPersistence := persistence.NewTagPersistence()
+
+	err := tagPersistence.DeleteTag(id)
+	if err != nil {
+		panic(err)
+	}
+
+	return err
+}

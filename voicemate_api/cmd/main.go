@@ -19,6 +19,7 @@ func main() {
 	echoInstance.GET("/tags/:id", handler.GetTag())
 	echoInstance.GET("/tags", handler.GetTags())
 	echoInstance.POST("/tags", handler.AddTag())
+	echoInstance.DELETE("/tags/:id", handler.DeleteTag())
 
 	echoInstance.Start(":8000")
 }
