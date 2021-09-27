@@ -15,5 +15,8 @@ func main() {
 
 	echoInstance.GET("/users", handler.GetUserList())
 
+	// タグ
+	echoInstance.GET("/tags/:id", handler.GetTag())
+
 	echoInstance.Start(":8000")
 }
