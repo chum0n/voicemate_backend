@@ -6,9 +6,17 @@ services:
     depends_on:
       - voicemate-db
     container_name: voicemate-api
+    environment:
+      - GO_ENV=local
+      - DBMS=postgres
+      - DB_NAME=voicemate
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
     volumes:
       - ./voicemate_api:/go/src
-    command: go run main.go
+    command: go run cmd/main.go
     tty: true
     ports:
       - "8000:8000"
