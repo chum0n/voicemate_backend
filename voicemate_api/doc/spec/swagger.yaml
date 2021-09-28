@@ -8,19 +8,6 @@ host: "localhost:8000"
 schemes:
 - "https"
 paths:
-  /:
-    get:
-      tags:
-      - "test"
-      responses:
-        200:
-          description: "Response on success"
-          schema:
-            type: "object"
-            properties:
-              message:
-                type: "string"
-                example: "Hello voicemate."
   /users/{id}:
     get:
       tags:
