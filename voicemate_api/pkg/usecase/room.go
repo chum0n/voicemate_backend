@@ -42,6 +42,7 @@ func UpdateRoom(id uint64, requestBody body.PutRoomRequest) (room model.Room) {
 	attributes["Gender"] = requestBody.Gender
 	attributes["MemberLimit"] = requestBody.MemberLimit
 	attributes["Introduction"] = requestBody.Introduction
+	attributes["Member"] = requestBody.Member
 
 	room, err := roomPersistence.UpdateRoom(id, attributes)
 	if err != nil {
