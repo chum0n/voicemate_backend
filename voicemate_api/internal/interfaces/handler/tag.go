@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -34,7 +33,6 @@ func AddTag() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		nameParameter := context.FormValue("name")
 
-		log.Printf(nameParameter)
 		tag := usecase.AddTag(nameParameter)
 		return context.JSON(http.StatusOK, tag)
 	}

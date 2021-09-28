@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/labstack/echo"
+	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/usecase"
 )
 
@@ -59,5 +60,23 @@ func GetRooms() echo.HandlerFunc {
 
 		rooms := usecase.GetRooms(nameParameter, ageLowerParameter_int, ageUpperParameter_int, genderParameter, memberLimitParameter_int)
 		return context.JSON(http.StatusOK, rooms)
+	}
+}
+
+func UpdateRoom() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		idParameter := context.Param("id")
+		id, error := strconv.ParseUint(idParameter, 10, 64)
+		if error != nil {
+			return context.JSON(http.StatusBadRequest, nil)
+		}
+
+		var requestBody body.PutRoomRequest
+		if err := context.Bind(&requestBody); err != nil {
+			return err
+		}
+
+		room := usecase.UpdateRoom(id, requestBody)
+		return context.JSON(http.StatusOK, room)
 	}
 }

@@ -63,3 +63,56 @@ func (roomPersistence RoomPersistence) GetRooms(name string, age_lower uint32, a
 
 	return rooms, nil
 }
+
+func (roomPersistence RoomPersistence) UpdateRoom(id uint64, attributes map[string]interface{}) (model.Room, error) {
+	room := model.Room{
+		ID: id,
+	}
+
+	result := roomPersistence.Connection.New().
+		Model(&room).
+		Updates(attributes)
+
+	if result.RecordNotFound() {
+		return room, nil
+	}
+	if result.Error != nil {
+		return room, result.Error
+	}
+	return room, nil
+}
+
+func (roomPersistence RoomPersistence) SaveTags(id uint64, tagIDs []uint64) error {
+	room, error := roomPersistence.FindRoomByID(id)
+	if error != nil {
+		return error
+	}
+
+	for _, tag := range room.Tags {
+		result := roomPersistence.Connection.New().
+			Table("room_tags").
+			Model(&room).
+			Association("Tags").
+			Delete(&tag)
+
+		if result.Error != nil {
+			return result.Error
+		}
+	}
+
+	for _, tagID := range tagIDs {
+		tag := model.Tag{ID: tagID}
+
+		result := roomPersistence.Connection.New().
+			Table("room_tags").
+			Model(&room).
+			Association("Tags").
+			Append(&tag)
+
+		if result.Error != nil {
+			return result.Error
+		}
+	}
+
+	return nil
+}
