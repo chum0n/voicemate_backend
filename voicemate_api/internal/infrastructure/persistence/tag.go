@@ -38,12 +38,15 @@ func (tagPersistence TagPersistence) FindTagByID(id uint64) (model.Tag, error) {
 }
 
 // GetAll gets tags from DB.
-func (tagPersistence TagPersistence) GetAll() ([]model.Tag, error) {
+func (tagPersistence TagPersistence) GetTags(name string) ([]model.Tag, error) {
 	tags := []model.Tag{}
 
-	result := tagPersistence.Connection.New().
-		Table("tags").
-		Find(&tags)
+	query := tagPersistence.Connection.New().Table("tags")
+	if name != "" {
+		query = query.Where("name LIKE ?", "%"+name+"%")
+	}
+
+	result := query.Find(&tags)
 
 	if result.RecordNotFound() {
 		return tags, nil

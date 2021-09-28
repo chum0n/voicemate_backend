@@ -24,7 +24,9 @@ func GetTag() echo.HandlerFunc {
 
 func GetTags() echo.HandlerFunc {
 	return func(context echo.Context) error {
-		tags := usecase.GetTags()
+		nameParameter := context.QueryParam("name")
+
+		tags := usecase.GetTags(nameParameter)
 		return context.JSON(http.StatusOK, tags)
 	}
 }
