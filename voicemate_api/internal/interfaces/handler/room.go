@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 	"strconv"
 
@@ -75,6 +76,7 @@ func UpdateRoom() echo.HandlerFunc {
 		if err := context.Bind(&requestBody); err != nil {
 			return err
 		}
+		log.Print(requestBody)
 
 		room := usecase.UpdateRoom(id, requestBody)
 		return context.JSON(http.StatusOK, room)
