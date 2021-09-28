@@ -139,3 +139,19 @@ func (roomPersistence RoomPersistence) CreateRoom(requestBody body.PutRoomReques
 
 	return room, nil
 }
+
+// DeleteRoom
+func (roomPersistence RoomPersistence) DeleteRoom(id uint64) error {
+	room := model.Room{
+		ID: id,
+	}
+	result := roomPersistence.Connection.New().Delete(&room)
+	if result.RecordNotFound() {
+		return nil
+	}
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
