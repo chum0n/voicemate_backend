@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS "public"."user_tags" (
     "user_id" BIGSERIAL NOT NULL,
     "tag_id" BIGSERIAL NOT NULL,
     PRIMARY KEY ("user_id", "tag_id"),
-    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id"),
-    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id")
+    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Room tags
@@ -64,8 +64,8 @@ CREATE TABLE IF NOT EXISTS "public"."room_tags" (
     "room_id" BIGSERIAL NOT NULL,
     "tag_id" BIGSERIAL NOT NULL,
     PRIMARY KEY ("room_id", "tag_id"),
-    FOREIGN KEY ("room_id") REFERENCES "public"."rooms"("id"),
-    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id")
+    FOREIGN KEY ("room_id") REFERENCES "public"."rooms"("id") ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY ("tag_id") REFERENCES "public"."tags"("id") ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- Follows
