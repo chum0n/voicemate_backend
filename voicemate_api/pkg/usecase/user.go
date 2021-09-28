@@ -39,3 +39,20 @@ func UpdateUser(id uint64, requestBody body.PutUserRequest) model.User {
 
 	return user
 }
+
+func AddUser(name string, email string, password string) model.User {
+	userPersistence := persistence.NewUserPersistence()
+
+	newUser := model.User{
+		Name:     name,
+		Email:    email,
+		Password: password,
+	}
+
+	user, error := userPersistence.CreateUser(newUser)
+
+	if error != nil {
+		panic(error)
+	}
+	return user
+}
