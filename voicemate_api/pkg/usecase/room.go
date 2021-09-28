@@ -19,9 +19,9 @@ func GetRoom(id uint64) model.Room {
 
 // DeleteRoom
 func DeleteRoom(id uint64) error{
-	tagPersistence := persistence.NewTagPersistence()
+	roomPersistence := persistence.NewRoomPersistence()
 
-	err := tagPersistence.DeleteRoom(id)
+	err := roomPersistence.DeleteRoom(id)
 	if err != nil {
 		panic(err)
 	}

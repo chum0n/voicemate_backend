@@ -56,3 +56,20 @@ func (roomPersistence RoomPersistence) FindRoomByID(id uint64) (model.Room, erro
 // 	}
 // 	return rooms, nil
 // }
+
+// DeleteRoom
+func (roomPersistence RoomPersistence) DeleteRoom(id uint64) error {
+	tag := model.Room{
+		ID: id,
+	}
+
+	result := RoomPersistence.Connection.New().Delete(&room)
+	if result.RecordNotFound() {
+		return nil
+	}
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}
