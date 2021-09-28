@@ -72,3 +72,14 @@ func AddRoom(requestBody body.PutRoomRequest) (room model.Room) {
 
 	return room
 }
+
+// DeleteRoom
+func DeleteRoom(id uint64) error {
+	roomPersistence := persistence.NewRoomPersistence()
+
+	err := roomPersistence.DeleteRoom(id)
+	if err != nil {
+		panic(err)
+	}
+	return err
+}

@@ -29,6 +29,7 @@ func main() {
 	echoInstance.GET("/rooms", handler.GetRooms())
 	echoInstance.PUT("/rooms/:id", handler.UpdateRoom())
 	echoInstance.POST("/rooms", handler.AddRoom())
+	echoInstance.DELETE("/rooms/:id", handler.DeleteRoom())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())

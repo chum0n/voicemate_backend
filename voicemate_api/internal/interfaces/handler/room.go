@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 	"strconv"
 
@@ -91,4 +92,19 @@ func AddRoom() echo.HandlerFunc {
 		room := usecase.AddRoom(requestBody)
 		return context.JSON(http.StatusOK, room)
 	}
+}
+
+func DeleteRoom() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		idParameter := context.Param("id")
+		id, err := strconv.ParseUint(idParameter, 10, 64)
+		if err != nil {
+			return context.JSON(http.StatusBadRequest, nil)
+		}
+
+		log.Print(id)
+		err = usecase.DeleteRoom(id)
+		return context.JSON(http.StatusOK, err)
+	}
+
 }

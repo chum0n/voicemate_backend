@@ -13,5 +13,6 @@ type (
 		UpdateRoom(uint64, map[string]interface{}) (model.Room, error)
 		SaveTags(uint64, []uint64) error
 		CreateRoom(body.PutRoomRequest) (model.Room, error)
+		DeleteRoom(id uint64) error
 	}
 )
