@@ -35,6 +35,7 @@ func main() {
 	echoInstance.GET("/tags", handler.GetTags())
 	echoInstance.POST("/tags", handler.AddTag())
 	echoInstance.DELETE("/tags/:id", handler.DeleteTag())
+	echoInstance.DELETE("/room/:id", handler.DeleteRoom())
 
 	echoInstance.Start(":8000")
 }
