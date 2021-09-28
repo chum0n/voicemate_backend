@@ -9,5 +9,6 @@ type (
 	RoomRepository interface {
 		FindRoomByID(id uint64) (model.Room, error)
 		// GetAll() ([]model.Room, error)
+		DeleteRoom(id uint64) error
 	}
 )
