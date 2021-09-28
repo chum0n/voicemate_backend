@@ -56,3 +56,19 @@ func UpdateRoom(id uint64, requestBody body.PutRoomRequest) (room model.Room) {
 
 	return room
 }
+
+func AddRoom(requestBody body.PutRoomRequest) (room model.Room) {
+	roomPersistence := persistence.NewRoomPersistence()
+
+	room, err := roomPersistence.CreateRoom(requestBody)
+	if err != nil {
+		panic(err)
+	}
+
+	err = roomPersistence.SaveTags(room.ID, requestBody.TagIDs)
+	if err != nil {
+		panic(err)
+	}
+
+	return room
+}
