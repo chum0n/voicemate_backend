@@ -291,7 +291,7 @@ definitions:
       password:
         type: "string"
         example: "test"
-      room:
+      roomID:
         type: "integer"
         format: "uint64"
         example: 1
@@ -364,6 +364,10 @@ definitions:
         example:
           - 1
           - 2
+      roomID:
+        type: "integer"
+        format: "uint64"
+        example: 1
   roomsRequest:
     type: "object"
     properties:
