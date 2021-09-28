@@ -71,12 +71,12 @@ paths:
       tags:
       - "users"
       parameters:
-      - name: "email"
-        in: formData
+      - name: "Email"
+        in: header
         required: true
         type: "string"
-      - name: "password"
-        in: formData
+      - name: "Password"
+        in: header
         required: true
         type: "string"
       responses:
