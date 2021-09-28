@@ -24,6 +24,7 @@ func main() {
 	echoInstance.PUT("/users/:id", handler.UpdateUser())
 	echoInstance.POST("/users", handler.AddUser())
 	echoInstance.GET("/users", handler.VerifyUser())
+	echoInstance.DELETE("/users/:id", handler.DeleteUser())
 
 	// 部屋
 	echoInstance.GET("/rooms/:id", handler.GetRoom())

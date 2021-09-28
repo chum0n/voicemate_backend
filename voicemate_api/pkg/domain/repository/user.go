@@ -12,5 +12,6 @@ type (
 		UpdateUser(uint64, map[string]interface{}) (model.User, error)
 		SaveTags(uint64, []uint64) error
 		FindUserByUserInfo(string, string) (model.User, error)
+		DeleteUser(id uint64) error
 	}
 )

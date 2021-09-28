@@ -8,19 +8,6 @@ host: "localhost:8000"
 schemes:
 - "https"
 paths:
-  /:
-    get:
-      tags:
-      - "test"
-      responses:
-        200:
-          description: "Response on success"
-          schema:
-            type: "object"
-            properties:
-              message:
-                type: "string"
-                example: "Hello voicemate."
   /users/{id}:
     get:
       tags:
@@ -65,15 +52,43 @@ paths:
         200:
           description: "Response on success"
   /users:
-    post:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
       tags:
       - "users"
       parameters:
-      - name: "body"
-        in: "body"
+      - name: "Email"
+        in: header
         required: true
-        schema:
-          $ref: "#/definitions/usersRequest" 
+        type: "string"
+      - name: "Password"
+        in: header
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Response on success"
+          schema:
+            $ref: "#/definitions/usersResponse"
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      tags:
+      - "users"
+      parameters:
+      - name: "name"
+        in: formData
+        required: true
+        type: "string"
+      - name: "email"
+        in: formData
+        required: true
+        type: "string"
+      - name: "password"
+        in: formData
+        required: true
+        type: "string"
       responses:
         200:
           description: "Response on success"
@@ -147,6 +162,11 @@ paths:
         in: "query"
         required: false
         type: "string"
+      - name: "tag_ids"
+        in: "query"
+        required: false
+        type: "string"
+        description: "Example: 1,2,3,4"
       responses:
         200:
           description: "Response on success"
@@ -182,24 +202,6 @@ paths:
           description: "Response on success"
           schema:
             $ref: "#/definitions/tagsResponse"
-    put:
-      tags:
-      - "tags"
-      parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        type: "number"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/tagsRequest" 
-      responses:
-        200:
-          description: "Response on success"
-          schema:
-            $ref: "#/definitions/tagsResponse"
     delete:
       tags:
       - "tags"
@@ -228,14 +230,15 @@ paths:
               items:
                 $ref: "#/definitions/tagsResponse"
     post:
+      consumes:
+        - application/x-www-form-urlencoded
       tags:
       - "tags"
       parameters:
-      - name: "body"
-        in: "body"
+      - name: "name"
+        in: formData
         required: true
-        schema:
-          $ref: "#/definitions/tagsRequest" 
+        type: "string"
       responses:
         200:
           description: "Response on success"
@@ -252,13 +255,6 @@ definitions:
       name:
         type: "string"
         example: "野球"
-  Tag_id:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-        example: 1
   usersResponse:
     type: "object"
     properties:
@@ -318,6 +314,10 @@ definitions:
       introduction:
         type: "string"
         example: "test"
+      member:
+        type: "integer"
+        format: "uint32"
+        example: 4
       tags:
         type: "array"
         items:
@@ -344,10 +344,17 @@ definitions:
       password:
         type: "string"
         example: "test"
-      tag_ids:
+      tagIDs:
         type: "array"
         items:
-          $ref: "#/definitions/Tag_id"
+          type: "integer"
+        example:
+          - 1
+          - 2
+      roomID:
+        type: "integer"
+        format: "uint64"
+        example: 1
   roomsRequest:
     type: "object"
     properties:
@@ -372,14 +379,14 @@ definitions:
       introduction:
         type: "string"
         example: "test"
-      tag_ids:
+      member:
+        type: "integer"
+        format: "uint32"
+        example: 4
+      tagIDs:
         type: "array"
         items:
-          $ref: "#/definitions/Tag_id"
-  tagsRequest:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-        example: "サッカー"
-
+          type: "integer"
+        example:
+          - 1
+          - 2

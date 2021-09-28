@@ -123,3 +123,19 @@ func (userPersistence UserPersistence) FindUserByUserInfo(email string, password
 
 	return user, nil
 }
+
+func (userPersistence UserPersistence) DeleteUser(id uint64) error {
+	user := model.User{
+		ID: id,
+	}
+
+	result := userPersistence.Connection.New().Delete(&user)
+	if result.RecordNotFound() {
+		return nil
+	}
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
+}

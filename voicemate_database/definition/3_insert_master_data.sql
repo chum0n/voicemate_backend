@@ -2,10 +2,10 @@
 INSERT INTO "public"."users"
     ("name", "email", "password", "age", "gender", "room_id")
 VALUES
-    ('テスト花子', 'hanakotest@example.com', password1, 20, 'female', 1),
-    ('テスト太郎', 'taroutest@example.com', password2, 40, 'male', 2),
-    ('楽天パンダ', 'pandatest@example.com', password3, 15, 'male', NULL),
-    ('楽天花子', 'hanakorakuten@example.com', password4, 20, 'female', NULL)
+    ('テスト花子', 'hanakotest@example.com', 'password1', 20, 'female', 1),
+    ('テスト太郎', 'taroutest@example.com', 'password2', 40, 'male', 2),
+    ('楽天パンダ', 'pandatest@example.com', 'password3', 15, 'male', NULL),
+    ('楽天花子', 'hanakorakuten@example.com', 'password4', 20, 'female', NULL)
 ;
 
 -- Rooms
