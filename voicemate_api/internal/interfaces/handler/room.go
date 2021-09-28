@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -102,7 +101,6 @@ func DeleteRoom() echo.HandlerFunc {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
 
-		log.Print(id)
 		err = usecase.DeleteRoom(id)
 		return context.JSON(http.StatusOK, err)
 	}

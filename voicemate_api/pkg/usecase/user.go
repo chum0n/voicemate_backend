@@ -68,3 +68,15 @@ func VerifyUser(email string, password string) model.User {
 
 	return user
 }
+
+// DeleteUser
+func DeleteUser(id uint64) error {
+	userPersistence := persistence.NewUserPersistence()
+
+	err := userPersistence.DeleteUser(id)
+	if err != nil {
+		panic(err)
+	}
+
+	return err
+}
