@@ -327,6 +327,10 @@ definitions:
       introduction:
         type: "string"
         example: "test"
+      member:
+        type: "integer"
+        format: "uint32"
+        example: 4
       tags:
         type: "array"
         items:
@@ -384,6 +388,10 @@ definitions:
       introduction:
         type: "string"
         example: "test"
+      member:
+        type: "integer"
+        format: "uint32"
+        example: 4
       tagIDs:
         type: "array"
         items:
