@@ -7,6 +7,6 @@ type PutRoomRequest struct {
 	Gender       *string  `json:"gender"`
 	MemberLimit  *uint32  `json:"memberLimit"`
 	Introduction *string  `json:"introduction"`
-	Member       uint32   `json:"memberLimit"`
+	Member       uint32   `json:"member"`
 	TagIDs       []uint64 `json:"tagIDs"`
 }

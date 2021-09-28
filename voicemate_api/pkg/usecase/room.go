@@ -1,8 +1,6 @@
 package usecase
 
 import (
-	"log"
-
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/internal/infrastructure/persistence"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/model"
@@ -46,8 +44,6 @@ func UpdateRoom(id uint64, requestBody body.PutRoomRequest) (room model.Room) {
 	attributes["Introduction"] = requestBody.Introduction
 	attributes["Member"] = requestBody.Member
 
-	log.Print(attributes["MemberLimit"])
-	log.Print(attributes["Member"])
 	room, err := roomPersistence.UpdateRoom(id, attributes)
 	if err != nil {
 		panic(err)
