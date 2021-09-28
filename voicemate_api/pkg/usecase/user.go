@@ -25,6 +25,7 @@ func UpdateUser(id uint64, requestBody body.PutUserRequest) model.User {
 		"Name":     requestBody.Name,
 		"Email":    requestBody.Email,
 		"Password": requestBody.Password,
+		"RoomID":   requestBody.RoomID,
 	}
 
 	user, error := userPersistence.UpdateUser(id, attributes)
