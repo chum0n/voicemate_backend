@@ -1,13 +1,11 @@
-CREATE EXTENSION pgcrypto;
-
 -- Users
 INSERT INTO "public"."users"
     ("name", "email", "password", "age", "gender", "room_id")
 VALUES
-    ('テスト花子', 'hanakotest@example.com', crypt('password1', gen_salt('md5')), 20, 'female', 1),
-    ('テスト太郎', 'taroutest@example.com', crypt('password2', gen_salt('md5')), 40, 'male', 2),
-    ('楽天パンダ', 'pandatest@example.com', crypt('password3', gen_salt('md5')), 15, 'male', NULL),
-    ('楽天花子', 'hanakorakuten@example.com', crypt('password4', gen_salt('md5')), 20, 'female', NULL)
+    ('テスト花子', 'hanakotest@example.com', password1, 20, 'female', 1),
+    ('テスト太郎', 'taroutest@example.com', password2, 40, 'male', 2),
+    ('楽天パンダ', 'pandatest@example.com', password3, 15, 'male', NULL),
+    ('楽天花子', 'hanakorakuten@example.com', password4, 20, 'female', NULL)
 ;
 
 -- Rooms
