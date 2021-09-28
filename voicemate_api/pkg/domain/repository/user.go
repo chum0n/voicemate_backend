@@ -8,5 +8,7 @@ type (
 	// UserRepository is the interface of User repository.
 	UserRepository interface {
 		FindUserByID(uint64) (model.User, error)
+		UpdateUser(uint64, map[string]interface{}) (model.User, error)
+		SaveTags(uint64, []uint64) error
 	}
 )

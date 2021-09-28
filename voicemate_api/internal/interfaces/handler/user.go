@@ -6,10 +6,24 @@ import (
 
 	"github.com/labstack/echo"
 
+	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/usecase"
 )
 
 func GetUser() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		idParameter := context.Param("id")
+		id, error := strconv.ParseUint(idParameter, 10, 64)
+		if error != nil {
+			return context.JSON(http.StatusBadRequest, nil)
+		}
+
+		user := usecase.GetUser(id)
+		return context.JSON(http.StatusOK, user)
+	}
+}
+
+func UpdateUser() echo.HandlerFunc {
 	return func(context echo.Context) error {
 		idParameter := context.Param("id")
 		id, error := strconv.ParseUint(idParameter, 10, 0)
@@ -17,7 +31,12 @@ func GetUser() echo.HandlerFunc {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
 
-		user := usecase.GetUser(id)
+		var requestBody body.PutUserRequest
+		if error := context.Bind(&requestBody); error != nil {
+			return error
+		}
+
+		user := usecase.UpdateUser(id, requestBody)
 		return context.JSON(http.StatusOK, user)
 	}
 }
