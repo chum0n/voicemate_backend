@@ -29,13 +29,13 @@ func main() {
 	echoInstance.GET("/rooms", handler.GetRooms())
 	echoInstance.PUT("/rooms/:id", handler.UpdateRoom())
 	echoInstance.POST("/rooms", handler.AddRoom())
+	echoInstance.DELETE("/rooms/:id", handler.DeleteRoom())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())
 	echoInstance.GET("/tags", handler.GetTags())
 	echoInstance.POST("/tags", handler.AddTag())
 	echoInstance.DELETE("/tags/:id", handler.DeleteTag())
-	echoInstance.DELETE("/room/:id", handler.DeleteRoom())
 
 	echoInstance.Start(":8000")
 }
