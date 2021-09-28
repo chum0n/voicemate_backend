@@ -81,5 +81,6 @@ func DeleteRoom(id uint64) error {
 	if err != nil {
 		panic(err)
 	}
+
 	return err
 }
