@@ -11,5 +11,6 @@ type (
 		CreateUser(model.User) (model.User, error)
 		UpdateUser(uint64, map[string]interface{}) (model.User, error)
 		SaveTags(uint64, []uint64) error
+		FindUserByUserInfo(string, string) (model.User, error)
 	}
 )
