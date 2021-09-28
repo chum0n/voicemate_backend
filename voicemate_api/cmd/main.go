@@ -16,11 +16,21 @@ func main() {
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
-
 	echoInstance.Use(middleware.Logger())
 	echoInstance.Use(middleware.Recover())
 
+	// ユーザ
 	echoInstance.GET("/users/:id", handler.GetUser())
+	echoInstance.PUT("/users/:id", handler.UpdateUser())
+	echoInstance.POST("/users", handler.AddUser())
+	echoInstance.GET("/users", handler.VerifyUser())
+
+	// 部屋
+	echoInstance.GET("/rooms/:id", handler.GetRoom())
+	echoInstance.GET("/rooms", handler.GetRooms())
+	echoInstance.PUT("/rooms/:id", handler.UpdateRoom())
+	echoInstance.POST("/rooms", handler.AddRoom())
+	echoInstance.DELETE("/rooms/:id", handler.DeleteRoom())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())

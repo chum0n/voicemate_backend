@@ -18,14 +18,14 @@ func GetTag(id uint64) model.Tag {
 }
 
 // GetTags gets tags.
-func GetTags() []model.Tag {
+func GetTags(name string) []model.Tag {
 	tagPersistence := persistence.NewTagPersistence()
 
-	tags, error := tagPersistence.GetAll()
-
-	if error != nil {
-		panic(error)
+	tags, err := tagPersistence.GetTags(name)
+	if err != nil {
+		panic(err)
 	}
+
 	return tags
 }
 
