@@ -121,11 +121,12 @@ func (roomPersistence RoomPersistence) SaveTags(id uint64, tagIDs []uint64) erro
 func (roomPersistence RoomPersistence) CreateRoom(requestBody body.PutRoomRequest) (model.Room, error) {
 	room := model.Room{
 		Name:         requestBody.Name,
-		AgeLower:     &requestBody.AgeLower,
-		AgeUpper:     &requestBody.AgeUpper,
-		Gender:       &requestBody.Gender,
-		MemberLimit:  &requestBody.MemberLimit,
-		Introduction: &requestBody.Introduction,
+		AgeLower:     requestBody.AgeLower,
+		AgeUpper:     requestBody.AgeUpper,
+		Gender:       requestBody.Gender,
+		MemberLimit:  requestBody.MemberLimit,
+		Introduction: requestBody.Introduction,
+		Member:       requestBody.Member,
 	}
 
 	result := roomPersistence.Connection.New().Create(&room)
