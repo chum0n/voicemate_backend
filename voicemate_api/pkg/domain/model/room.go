@@ -9,6 +9,9 @@ type (
 		Gender       *string `json:"gender" gorm:"column:gender;type:text"`
 		MemberLimit  *uint32 `json:"memberLimit" gorm:"column:member_limit;type:integer;"`
 		Introduction *string `json:"introduction" gorm:"column:introduction;type:text;"`
+		Member       uint32  `json:"member" gorm:"column:member;type:text;not null"`
+
+		Tags []Tag `json:"tags" gorm:"many2many:room_tags;"`
 	}
 )
 

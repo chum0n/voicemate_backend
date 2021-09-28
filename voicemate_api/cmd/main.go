@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
@@ -9,13 +11,24 @@ import (
 
 func main() {
 	echoInstance := echo.New()
-
+	// CORS
+	echoInstance.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 	echoInstance.Use(middleware.Logger())
 	echoInstance.Use(middleware.Recover())
 
+	// ユーザ
 	echoInstance.GET("/users/:id", handler.GetUser())
 	echoInstance.PUT("/users/:id", handler.UpdateUser())
 	echoInstance.POST("/users", handler.AddUser())
+
+	// 部屋
+	echoInstance.GET("/rooms/:id", handler.GetRoom())
+	echoInstance.GET("/rooms", handler.GetRooms())
+	echoInstance.PUT("/rooms/:id", handler.UpdateRoom())
+	echoInstance.POST("/rooms", handler.AddRoom())
 
 	// タグ
 	echoInstance.GET("/tags/:id", handler.GetTag())

@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 
+	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/domain/body"
 	"github.com/rakutenshortintern2021-D-utopia/D-4_2/pkg/usecase"
 )
 
@@ -30,11 +31,12 @@ func UpdateUser() echo.HandlerFunc {
 			return context.JSON(http.StatusBadRequest, nil)
 		}
 
-		nameParameter := context.FormValue("name")
-		emailParameter := context.FormValue("email")
-		passwordParameter := context.FormValue("password")
+		var requestBody body.PutUserRequest
+		if error := context.Bind(&requestBody); error != nil {
+			return error
+		}
 
-		user := usecase.UpdateUser(id, nameParameter, emailParameter, passwordParameter)
+		user := usecase.UpdateUser(id, requestBody)
 		return context.JSON(http.StatusOK, user)
 	}
 }
