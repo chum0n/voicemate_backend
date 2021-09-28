@@ -23,6 +23,7 @@ func main() {
 	echoInstance.GET("/users/:id", handler.GetUser())
 	echoInstance.PUT("/users/:id", handler.UpdateUser())
 	echoInstance.POST("/users", handler.AddUser())
+	echoInstance.GET("/users", handler.VerifyUser())
 
 	// 部屋
 	echoInstance.GET("/rooms/:id", handler.GetRoom())

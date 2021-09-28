@@ -56,3 +56,14 @@ func AddUser(name string, email string, password string) model.User {
 	}
 	return user
 }
+
+func VerifyUser(email string, password string) model.User {
+	userPersistence := persistence.NewUserPersistence()
+
+	user, err := userPersistence.FindUserByUserInfo(email, password)
+	if err != nil {
+		panic(err)
+	}
+
+	return user
+}

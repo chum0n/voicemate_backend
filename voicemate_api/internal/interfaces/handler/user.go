@@ -51,3 +51,13 @@ func AddUser() echo.HandlerFunc {
 		return context.JSON(http.StatusOK, user)
 	}
 }
+
+func VerifyUser() echo.HandlerFunc {
+	return func(context echo.Context) error {
+		email := context.Request().Header.Get("Email")
+		password := context.Request().Header.Get("Password")
+
+		user := usecase.VerifyUser(email, password)
+		return context.JSON(http.StatusOK, user)
+	}
+}

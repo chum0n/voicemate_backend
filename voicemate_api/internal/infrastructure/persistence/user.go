@@ -105,3 +105,21 @@ func (userPersistence UserPersistence) SaveTags(id uint64, tagIDs []uint64) erro
 
 	return nil
 }
+
+func (userPersistence UserPersistence) FindUserByUserInfo(email string, password string) (model.User, error) {
+	user := model.User{}
+
+	result := userPersistence.Connection.New().
+		Table("users").
+		Where(`"email" = ? AND password = ?`, email, password).
+		Preload("Tags").
+		Find(&user)
+	if result.RecordNotFound() {
+		return user, nil
+	}
+	if result.Error != nil {
+		return user, result.Error
+	}
+
+	return user, nil
+}
